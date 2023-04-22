@@ -40,8 +40,7 @@ typedef unsigned char byte;
 static uint32_t start_time = 0;
 #define DEBUG_TIME_BEGIN()  start_time=millis();
 #define DEBUG_TIME_END(func_name)  HOMEKIT_PRINTF("### [%7d] %s took %6dms", millis(), func_name, (millis() - start_time));
-#define DEBUG_HEAP() DEBUG("Free heap: %d", system_get_free_heap_size());
-
+#define DEBUG_HEAP() DEBUG("Free heap: %u", esp_get_free_heap_size());
 #else
 
 #define DEBUG(message, ...)
@@ -64,8 +63,7 @@ static uint32_t start_time = 0;
 #if HOMEKIT_LOG_LEVEL >= HOMEKIT_LOG_INFO
 
 #define INFO(message, ...) HOMEKIT_PRINTF(">>> [%7d] HomeKit: " message, millis(), ##__VA_ARGS__)
-#define INFO_HEAP() INFO("Free heap: %d", system_get_free_heap_size());
-
+#define INFO_HEAP() INFO("Free heap: %u", esp_get_free_heap_size());
 #else
 
 #define INFO(message, ...)
