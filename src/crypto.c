@@ -432,7 +432,7 @@ int crypto_ed25519_sign(
         return -2;
     }
     #if defined(ARDUINO_HOMEKIT_LOWROM)
-    /*  ESP8266 Soft WDT resets with 512k ROMs.
+    /*  ESP Soft WDT resets with 512k ROMs.
         Add yield() to perform other tasks and feed WDT.
     */
     yield();
@@ -459,7 +459,7 @@ int crypto_ed25519_verify(
 	return 0;
 #else
 #if defined(ARDUINO_HOMEKIT_LOWROM)
-    /*  ESP8266 Soft WDT resets with 512k ROMs.
+    /*  ESP Soft WDT resets with 512k ROMs.
         Add yield() to perform other tasks and feed WDT.
     */
     yield();
