@@ -431,6 +431,12 @@ int crypto_ed25519_sign(
         *signature_size = ED25519_SIG_SIZE;
         return -2;
     }
+    #if defined(ARDUINO_HOMEKIT_LOWROM)
+    /*  ESP8266 Soft WDT resets with 512k ROMs.
+        Add yield() to perform other tasks and feed WDT.
+    */
+    yield();
+#endif
 
     word32 len = *signature_size;
 
@@ -452,6 +458,12 @@ int crypto_ed25519_verify(
 #if defined(ARDUINO_HOMEKIT_SKIP_ED25519_VERIFY)
 	return 0;
 #else
+#if defined(ARDUINO_HOMEKIT_LOWROM)
+    /*  ESP8266 Soft WDT resets with 512k ROMs.
+        Add yield() to perform other tasks and feed WDT.
+    */
+    yield();
+#endif
     int verified;
     int r = wc_ed25519_verify_msg(
         signature, signature_size,
