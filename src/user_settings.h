@@ -27,7 +27,8 @@ static inline int hwrand_generate_block(uint8_t *buf, size_t len) {
 }
 
 #elif defined(ARDUINO_ARCH_ESP32)
-#include <esp_system.h>
+//#include <esp_system.h>
+#include <esp_random.h>
 static inline int hwrand_generate_block(uint8_t *buf, size_t len) {
 	esp_fill_random(buf, len);
     return 0;
